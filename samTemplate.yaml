@@ -6,7 +6,6 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: lambda_function.py
-      DeletionPolicy: Retain
       Handler: lambda_function.lambda_handler
       Runtime: python3.6
       CodeUri: ./lf1-code
