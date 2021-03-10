@@ -5,7 +5,7 @@ Resources:
   CDDemoLambda:
     Type: 'AWS::Serverless::Function'
     Properties:
-      FunctionName: test-1
+      FunctionName: lambda_function.py
       DeletionPolicy: Retain
       Handler: lambda_function.lambda_handler
       Runtime: python3.6
