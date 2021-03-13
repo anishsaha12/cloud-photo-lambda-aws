@@ -17,6 +17,7 @@ Resources:
       Environment:
         Variables:
           REGION: us-east-1
+          
   hw2lf2searchPhoto:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -29,4 +30,7 @@ Resources:
       Timeout: 30
       Role: >-
         arn:aws:iam::164930094788:role/service-role/hw2-lf2-search-photos-role-pcqw40is
+      Environment:
+        Variables:
+          REGION: us-east-1
   
