@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: CD HW2 Lambda Templates
 Resources:
-  hw2lf1indexphotos:
+  CDDemoLambda:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: lambda_function
