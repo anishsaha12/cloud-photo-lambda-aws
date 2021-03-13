@@ -29,10 +29,4 @@ Resources:
       Timeout: 30
       Role: >-
         arn:aws:iam::164930094788:role/service-role/hw2-lf2-search-photos-role-pcqw40is
-      Events:
-        Api1:
-          Type: Api
-          Properties:
-            Path: /search
-            Method: GET
   
