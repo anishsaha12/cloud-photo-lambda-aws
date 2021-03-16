@@ -74,6 +74,8 @@ def lambda_handler(event, context):
             f_id = match['Face']['FaceId']
             response = table.get_item(Key={'FaceId': f_id})
             detected_name_tags.append(response['Item']['name_tag'])
+
+        detected_name_tags = list(set(detected_name_tags))
         
         custom_labels += detected_name_tags
         print("detected_name_tags: {}".format(detected_name_tags))
@@ -190,23 +192,23 @@ def lambda_handler(event, context):
     # code based on https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-request-signing.html#es-request-signing-python
     
     
-    # region = 'us-east-1'
-    # service = 'es'
-    # credentials = boto3.Session().get_credentials()
-    # awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
+    region = 'us-east-1'
+    service = 'es'
+    credentials = boto3.Session().get_credentials()
+    awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
     
-    # host = "search-photos-7ka2227iannxvqedwmlx62ft7u.us-east-1.es.amazonaws.com"
+    host = "search-hw2-photos-elastic-search-ehac5wtt5wwksboszvgj5gbynq.us-east-1.es.amazonaws.com"
     
-    # es = Elasticsearch(
-    #     hosts = [{'host': host, 'port': 443}],
-    #     http_auth = awsauth,
-    #     use_ssl = True,
-    #     verify_certs = True,
-    #     connection_class = RequestsHttpConnection
-    # )
+    es = Elasticsearch(
+        hosts = [{'host': host, 'port': 443}],
+        http_auth = awsauth,
+        use_ssl = True,
+        verify_certs = True,
+        connection_class = RequestsHttpConnection
+    )
     
 
-    # es.index(index="photos", id=es_json["objectKey"], body=es_json)
+    es.index(index="photos", id=es_json["objectKey"], body=es_json)
     
     
     return None

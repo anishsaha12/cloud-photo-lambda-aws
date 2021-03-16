@@ -46,91 +46,91 @@ def lambda_handler(event, context):
     # labels = ["dog"]
 
 
-    # region = 'us-east-1'
-    # service = 'es'
-    # credentials = boto3.Session().get_credentials()
-    # awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
-    # host = 'search-photos-7ka2227iannxvqedwmlx62ft7u.us-east-1.es.amazonaws.com' # For example, search-mydomain-id.us-west-1.es.amazonaws.com
-    # index = 'photos'
-    # url = 'https://' + host + '/' + index + '/_search'
-    # headers = { "Content-Type": "application/json" }
+    region = 'us-east-1'
+    service = 'es'
+    credentials = boto3.Session().get_credentials()
+    awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
+    host = 'search-hw2-photos-elastic-search-ehac5wtt5wwksboszvgj5gbynq.us-east-1.es.amazonaws.com' # For example, search-mydomain-id.us-west-1.es.amazonaws.com
+    index = 'photos'
+    url = 'https://' + host + '/' + index + '/_search'
+    headers = { "Content-Type": "application/json" }
     
 
-    # es_query_string = ""
-    # if len(labels) >=1 :
-    #     es_query_string = "(" + labels[0] + ")"
-    #     for i in range(len(labels) - 1):
-    #         es_query_string = es_query_string + " OR (" + labels[i+1] + ")"
+    es_query_string = ""
+    if len(labels) >=1 :
+        es_query_string = "(" + labels[0] + ")"
+        for i in range(len(labels) - 1):
+            es_query_string = es_query_string + " OR (" + labels[i+1] + ")"
             
             
 
-    # query = {
-    #     "size": 10,        
-    #     "query": {
-    #         "query_string": {
-    #           "default_field": "labels",
-    #           "query": es_query_string
-    #         }
-    #       }
-    # }
+    query = {
+        "size": 10,        
+        "query": {
+            "query_string": {
+              "default_field": "labels",
+              "query": es_query_string
+            }
+          }
+    }
     
-    # r = requests.get(url, auth=awsauth, headers=headers, data=json.dumps(query)).json()
+    r = requests.get(url, auth=awsauth, headers=headers, data=json.dumps(query)).json()
     
-    # search_result_list = r["hits"]["hits"]
+    search_result_list = r["hits"]["hits"]
     
     matching_images_loc = []
     
-    search_result_list = [
-        {
-            "_source": {
-                "objectKey": "116227.jpg",
-                "bucket": "hw2-b2-photos",
-                "labels": [
-                    "Person",
-                    "Human",
-                    "Building",
-                    "Campus",
-                    "Urban"
-                ]
-            }
-        },
-        {
-            "_source": {
-                "objectKey": "116341.jpg",
-                "bucket": "hw2-b2-photos",
-                "labels": [
-                    "People",
-                    "City",
-                    "Town",
-                    "Downtown"
-                ]
-            }
-        },
-        {
-            "_source": {
-                "objectKey": "117173.jpg",
-                "bucket": "hw2-b2-photos",
-                "labels": [
-                    "Architecture",
-                    "Grass",
-                    "Plant",
-                    "Field"
-                ]
-            }
-        },
-        {
-            "_source": {
-                "objectKey": "117346.jpg",
-                "bucket": "hw2-b2-photos",
-                "labels": [
-                    "Vegetation",
-                    "Amphitheatre",
-                    "Arena",
-                    "Amphitheater",
-                ]
-            }
-        }
-    ]
+    # search_result_list = [
+    #     {
+    #         "_source": {
+    #             "objectKey": "116227.jpg",
+    #             "bucket": "hw2-b2-photos",
+    #             "labels": [
+    #                 "Person",
+    #                 "Human",
+    #                 "Building",
+    #                 "Campus",
+    #                 "Urban"
+    #             ]
+    #         }
+    #     },
+    #     {
+    #         "_source": {
+    #             "objectKey": "116341.jpg",
+    #             "bucket": "hw2-b2-photos",
+    #             "labels": [
+    #                 "People",
+    #                 "City",
+    #                 "Town",
+    #                 "Downtown"
+    #             ]
+    #         }
+    #     },
+    #     {
+    #         "_source": {
+    #             "objectKey": "117173.jpg",
+    #             "bucket": "hw2-b2-photos",
+    #             "labels": [
+    #                 "Architecture",
+    #                 "Grass",
+    #                 "Plant",
+    #                 "Field"
+    #             ]
+    #         }
+    #     },
+    #     {
+    #         "_source": {
+    #             "objectKey": "117346.jpg",
+    #             "bucket": "hw2-b2-photos",
+    #             "labels": [
+    #                 "Vegetation",
+    #                 "Amphitheatre",
+    #                 "Arena",
+    #                 "Amphitheater",
+    #             ]
+    #         }
+    #     }
+    # ]
     
     for result in search_result_list:
         image_name = result["_source"]["objectKey"]
