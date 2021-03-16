@@ -29,7 +29,7 @@ Resources:
       MemorySize: 128
       Timeout: 30
       Role: >-
-        arn:aws:iam::164930094788:role/service-role/hw2-lf2-search-photos-role-pcqw40is
+        arn:aws:iam::164930094788:role/service-role/hw2-lf1-index-photos-role-z6pvz8mv
       Environment:
         Variables:
           REGION: us-east-1

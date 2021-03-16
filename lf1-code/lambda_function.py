@@ -60,22 +60,25 @@ def lambda_handler(event, context):
         print("dynamodb put response :{}".format(response))
     
     else:                   # user doesn't provide name -> auto detect name if existing already
-        response = client.search_faces_by_image(
-            CollectionId=collection_id_name,
-    		Image={
-    		    "S3Object":{"Bucket": insert_bucket, "Name": insert_key}
-    		}
-        )
-    
         detected_name_tags = []
         
-        for match in response['FaceMatches']:
-            print(match['Face']['FaceId'],match['Face']['Confidence'])
-            f_id = match['Face']['FaceId']
-            response = table.get_item(Key={'FaceId': f_id})
-            detected_name_tags.append(response['Item']['name_tag'])
-
-        detected_name_tags = list(set(detected_name_tags))
+        try:
+            response = client.search_faces_by_image(
+                CollectionId=collection_id_name,
+        		Image={
+        		    "S3Object":{"Bucket": insert_bucket, "Name": insert_key}
+        		}
+            )
+            
+            for match in response['FaceMatches']:
+                print(match['Face']['FaceId'],match['Face']['Confidence'])
+                f_id = match['Face']['FaceId']
+                response = table.get_item(Key={'FaceId': f_id})
+                detected_name_tags.append(response['Item']['name_tag'])
+    
+            detected_name_tags = list(set(detected_name_tags))
+        except:
+            pass
         
         custom_labels += detected_name_tags
         print("detected_name_tags: {}".format(detected_name_tags))
