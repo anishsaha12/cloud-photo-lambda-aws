@@ -11,7 +11,7 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection
 
 def lambda_handler(event, context):
     print(event)
-
+    # comment
     
     insert_bucket = event["Records"][0]["s3"]["bucket"]["name"]
     insert_key = event["Records"][0]["s3"]["object"]["key"]
