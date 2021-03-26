@@ -50,8 +50,10 @@ def lambda_handler(event, context):
     service = 'es'
     credentials = boto3.Session().get_credentials()
     awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
+    
     ## CHANGE
     host = 'search-hw2-photos-elastic-search-ehac5wtt5wwksboszvgj5gbynq.us-east-1.es.amazonaws.com' # For example, search-mydomain-id.us-west-1.es.amazonaws.com
+    
     index = 'photos'
     url = 'https://' + host + '/' + index + '/_search'
     headers = { "Content-Type": "application/json" }
