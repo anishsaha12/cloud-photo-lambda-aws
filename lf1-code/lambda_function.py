@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     
     client=boto3.client('rekognition')
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table("hw2-faces-index-dynamodb")
+    table = dynamodb.Table("hw2-face-index-dynamodb")
     collection_id_name = "hw2-my-faces-collection"
 
     try:
@@ -200,6 +200,7 @@ def lambda_handler(event, context):
     credentials = boto3.Session().get_credentials()
     awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
     
+    ## CHANGE
     host = "search-hw2-photos-elastic-search-ehac5wtt5wwksboszvgj5gbynq.us-east-1.es.amazonaws.com"
     
     es = Elasticsearch(
